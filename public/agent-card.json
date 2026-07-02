@@ -1,0 +1,24 @@
+{
+  "protocolVersion": "0.2.0",
+  "name": "Sonar — Multichain Market Data & Gas Oracle",
+  "description": "Real-time multichain market data and gas oracle for AI agents. Token price, liquidity, 24h volume, FDV, pair age, holder concentration, and current gas across Base, Solana, Arbitrum, and BNB in one fast, timestamped call. Reliable pre-trade data with redundant RPC fallback and freshness stamps. Free gas+price resource; watchlists and threshold alerts via ACP Accounts and Notification Memos.",
+  "provider": { "organization": "Sonar", "url": "https://sonar-acp.onrender.com" },
+  "url": "https://sonar-acp.onrender.com",
+  "version": "0.1.0",
+  "capabilities": { "streaming": false, "pushNotifications": true, "stateTransitionHistory": false },
+  "defaultInputModes": ["application/json"],
+  "defaultOutputModes": ["application/json"],
+  "payment": { "protocol": "virtuals-acp", "network": "base", "asset": "USDC", "model": "per-job" },
+  "skills": [
+    { "id": "token_snapshot", "name": "Token Snapshot", "price_usd": 0.02, "tags": ["price", "liquidity", "multichain"], "description": "Price, liquidity, 24h volume, FDV, market cap, pair age for any token on Base/Solana/Arbitrum/BNB. Chain auto-detected." },
+    { "id": "gas_now", "name": "Gas Now (multichain)", "price_usd": 0.01, "tags": ["gas", "multichain", "rpc"], "description": "Current gas across Base/Ethereum/Arbitrum/BNB (gwei) and Solana (base+priority) in one call with redundant RPC fallback." },
+    { "id": "token_holders", "name": "Token Holders", "price_usd": 0.02, "tags": ["holders", "concentration", "whale"], "description": "Holder count and top-holder concentration (whale risk) via Blockscout, with coverage flag." },
+    { "id": "market_pulse", "name": "Market Pulse (composite)", "price_usd": 0.03, "tags": ["composite", "pre-trade", "tvl"], "description": "One-call composite: token price+liquidity+volume + current gas + chain TVL. The recommended default." },
+    { "id": "watchlist_set", "name": "Watchlist Set", "price_usd": 0.02, "tags": ["accounts", "watchlist", "alerts"], "description": "Store tracked tokens and alert thresholds (ACP Accounts). Enables personalized deltas and Notification Memo alerts." },
+    { "id": "watchlist_status", "name": "Watchlist Status", "price_usd": 0.01, "tags": ["accounts", "personalized"], "description": "Your watched tokens with price change since added." }
+  ],
+  "resources": [
+    { "id": "sonar_pulse", "free": true, "path": "/resource/pulse", "description": "Free read-only: current Base gas (gwei) + ETH/SOL/BNB prices." }
+  ],
+  "disclaimer": "Informational market data aggregated from public sources; not financial advice."
+}

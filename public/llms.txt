@@ -1,0 +1,37 @@
+# Sonar — Multichain Market Data & Gas Oracle
+
+> Real-time token price, liquidity, volume, FDV, holder concentration, and current gas price
+> across Base, Solana, Arbitrum, and BNB Chain — in one fast, timestamped call.
+> Built for the loop every AI agent runs before it acts: check price, check gas, check liquidity.
+> Reliable by design: redundant public-RPC fallback (public Base/Arbitrum RPCs frequently return
+> 403 — Sonar races a pool so you always get an answer). Every response carries freshness_seconds.
+
+## Why Sonar over a raw API
+- Multichain in one call (Base, Solana, Arbitrum, BNB) vs single-chain wrappers.
+- Reliability is the product: RPC pool + fallback + freshness stamps, not a lone endpoint that 403s.
+- Personalized via ACP Accounts (watchlists) and ACP Notification Memos (price/gas alerts).
+- Free read-only resource so you can try before you pay.
+
+## Offerings
+- token_snapshot — $0.02 — Price, liquidity, 24h volume, FDV, market cap, pair age for any token
+  on Base/Solana/Arbitrum/BNB. Chain auto-detected. Input: { address, chain? }.
+- gas_now — $0.01 — Current gas across Base/Ethereum/Arbitrum/BNB (gwei) and Solana (base+priority)
+  in one call, with RPC fallback. Input: { chain? } (omit for all chains).
+- token_holders — $0.02 — Holder count and top-holder concentration (whale risk). Input: { address, chain }.
+- market_pulse — $0.03 — Composite: token price+liquidity+volume + gas + chain TVL. The default call.
+  Input: { address, chain? }.
+- watchlist_set — $0.02 — Store tracked tokens + alert thresholds (ACP Accounts). Input: { items:[{address,chain}], alerts? }.
+- watchlist_status — $0.01 — Your watched tokens with change since added. Input: {}.
+
+## Free resource (no payment)
+- GET /resource/pulse — current Base gas (gwei) + ETH/SOL/BNB prices.
+
+## Keywords
+token price, liquidity check, current gas price Base Solana Arbitrum BNB, multichain market data,
+pre-trade check, before you trade, holder concentration, whale check, market data oracle, FDV,
+pair age, token snapshot, gas oracle, price feed for agents.
+
+## Endpoints
+- Health: /health
+- Agent card: /.well-known/agent-card.json
+- Data is informational and sourced from public providers (DexScreener, CoinGecko, DeFiLlama, public RPCs, Blockscout).

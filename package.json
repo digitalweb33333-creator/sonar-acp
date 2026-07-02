@@ -1,0 +1,23 @@
+{
+  "name": "sonar-acp",
+  "version": "0.1.0",
+  "description": "Sonar — Multichain Market Data & Gas Oracle for Virtuals ACP agents. Token price, liquidity, gas, holders across Base, Solana, Arbitrum, BNB.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "worker": "node src/worker.js",
+    "acp": "node src/acp.js",
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "optionalDependencies": {
+    "@virtuals-protocol/acp-node-v2": "^0.1.7"
+  },
+  "license": "MIT"
+}
